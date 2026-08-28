@@ -176,4 +176,30 @@
 
         // Player movement triggers world time steps
         document.addEventListener('keydown', (e) => {
-            
+            if (!gameActive) return;
+
+            let moved = false;
+            if (e.key === 'ArrowLeft' && player.x > 10) { player.x -= 20; moved = true; }
+            if (e.key === 'ArrowRight' && player.x < size - 30) { player.x += 20; moved = true; }
+            if (e.key === 'ArrowUp' && player.y > 10) { player.y -= 20; moved = true; }
+            if (e.key === 'ArrowDown' && player.y < size - 30) { player.y += 20; moved = true; }
+
+            if (moved) {
+                playerEl.style.left = player.x + 'px';
+                playerEl.style.top = player.y + 'px';
+                
+                // Active status feedback
+                stateEl.innerText = "ACTIVE";
+                stateEl.className = "state-active";
+
+                // Update the game world since player moved
+                updateWorld();
+                
+                // Refreeze immediately after step transition
+                setTimeout(() => {
+                    if(gameActive) {
+                        stateEl.innerText = "FROZEN";
+                        stateEl.className = "state-frozen";
+                    }
+                }, 100);
+            }
