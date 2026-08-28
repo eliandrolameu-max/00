@@ -203,3 +203,36 @@
                     }
                 }, 100);
             }
+            });
+
+        function updateWorld() {
+            // Check core score collection
+            if (Math.abs(player.x - energy.x) < 15 && Math.abs(player.y - energy.y) < 15) {
+                score++;
+                scoreEl.innerText = score;
+                spawnEnergy();
+                // Spawn an additional glitch every 2 scores to escalate difficulty
+                if(score % 2 === 0) spawnGlitch();
+            }
+
+            // Move glitches
+            glitches.forEach(g => {
+                // Randomly shift direction patterns based on player input triggers
+                if(Math.random() < 0.15) {
+                    g.dx = (Math.random() > 0.5 ? 20 : -20);
+                    g.dy = (Math.random() > 0.5 ? 20 : -20);
+                }
+
+                g.x += g.dx;
+                g.y += g.dy;
+
+                // Wall boundary physics
+                if (g.x <= 10 || g.x >= size - 30) g.dx *= -1;
+                if (g.y <= 10 || g.y >= size - 30) g.dy *= -1;
+
+                g.element.style.left = g.x + 'px';
+                g.element.style.top = g.y + 'px';
+
+                // Hitbox detection
+                if (Math.abs(player.x - g.x) < 15 && Math.abs(player.y - g.y) < 15) {
+                    gameOver();
