@@ -176,3 +176,4 @@
 
         // Player movement triggers world time steps
         document.addEventListener('keydown', (e) => {
+            
