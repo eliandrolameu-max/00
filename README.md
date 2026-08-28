@@ -143,3 +143,36 @@
         function spawnEnergy() {
             if(energy.element) energy.element.remove();
             const el = document.createElement('div');
+            el.className = 'energy';
+            energy.x = Math.floor(Math.random() * 24) * 20 + 10;
+            energy.y = Math.floor(Math.random() * 24) * 20 + 10;
+            el.style.left = energy.x + 'px';
+            el.style.top = energy.y + 'px';
+            board.appendChild(el);
+            energy.element = el;
+        }
+
+        function spawnGlitch() {
+            const el = document.createElement('div');
+            el.className = 'glitch';
+            let x = Math.floor(Math.random() * 24) * 20 + 10;
+            let y = Math.floor(Math.random() * 24) * 20 + 10;
+            
+            // Avoid spawning on top of the player
+            while(Math.abs(x - player.x) < 60 && Math.abs(y - player.y) < 60) {
+                x = Math.floor(Math.random() * 24) * 20 + 10;
+                y = Math.floor(Math.random() * 24) * 20 + 10;
+            }
+
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            board.appendChild(el);
+            glitches.push({
+                element: el, x: x, y: y,
+                dx: (Math.random() > 0.5 ? 20 : -20),
+                dy: (Math.random() > 0.5 ? 20 : -20)
+            });
+        }
+
+        // Player movement triggers world time steps
+        document.addEventListener('keydown', (e) => {
