@@ -111,3 +111,35 @@
             <button onclick="resetGame()">RESTART</button>
         </div>
     </div>
+    <div id="status-bar">
+        Use ⬅️ ⬆️ ➡️ ⬇️ arrow keys to move.<br>
+        Time only moves when you move. Stop moving to freeze everything.
+    </div>
+
+    <script>
+        const board = document.getElementById('game-board');
+        const playerEl = document.getElementById('player');
+        const scoreEl = document.getElementById('score');
+        const stateEl = document.getElementById('time-state');
+        const overlay = document.getElementById('screen-overlay');
+        const overlayTitle = document.getElementById('overlay-title');
+
+        const size = 500;
+        let player = { x: 240, y: 240 };
+        let score = 0;
+        let gameActive = true;
+        
+        let glitches = [];
+        let energy = { x: 0, y: 0, element: null };
+
+        // Initialize game
+        function init() {
+            playerEl.style.left = player.x + 'px';
+            playerEl.style.top = player.y + 'px';
+            spawnEnergy();
+            for(let i=0; i<4; i++) spawnGlitch();
+        }
+
+        function spawnEnergy() {
+            if(energy.element) energy.element.remove();
+            const el = document.createElement('div');
