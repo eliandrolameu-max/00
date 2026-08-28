@@ -51,3 +51,30 @@
             position: absolute;
             width: 16px;
             height: 16px;
+            background: #ffff00;
+            box-shadow: 0 0 15px #ffff00;
+            border-radius: 50%;
+        }
+        #ui {
+            width: 500px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #status-bar {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .state-frozen { color: #ffff00 !important; text-shadow: 0 0 5px #ffff00; }
+        .state-active { color: #00ffcc !important; text-shadow: 0 0 5px #00ffcc; }
+        #screen-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 5, 10, 0.9);
+            flex-direction: column;
