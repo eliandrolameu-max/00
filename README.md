@@ -236,3 +236,33 @@
                 // Hitbox detection
                 if (Math.abs(player.x - g.x) < 15 && Math.abs(player.y - g.y) < 15) {
                     gameOver();
+                    }
+            });
+        }
+
+        function gameOver() {
+            gameActive = false;
+            overlayTitle.innerText = "CONNECTION LOST";
+            stateEl.innerText = "CRITICAL FAILURE";
+            stateEl.style.color = "#ff0055";
+            overlay.style.display = 'flex';
+        }
+
+        function resetGame() {
+            glitches.forEach(g => g.element.remove());
+            glitches = [];
+            score = 0;
+            scoreEl.innerText = score;
+            player = { x: 240, y: 240 };
+            gameActive = true;
+            overlay.style.display = 'none';
+            stateEl.innerText = "FROZEN";
+            stateEl.className = "state-frozen";
+            init();
+        }
+
+        // Boot system
+        init();
+    </script>
+</body>
+</html>
