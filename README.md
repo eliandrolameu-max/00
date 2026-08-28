@@ -78,3 +78,36 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 5, 10, 0.9);
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        #screen-overlay h2 { font-size: 32px; color: #ff0055; margin-bottom: 15px; }
+        button {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid #00ffcc;
+            color: #00ffcc;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,255,204,0.3);
+        }
+        button:hover { background: #00ffcc; color: #05050a; }
+    </style>
+</head>
+<body>
+
+    <h1>TIME_HACKER.EXE</h1>
+    <div id="ui">
+        <div>CORES: <span id="score">0</span></div>
+        <div>STATUS: <span id="time-state" class="state-frozen">FROZEN</span></div>
+    </div>
+
+    <div id="game-board">
+        <div id="player"></div>
+        <div id="screen-overlay">
+            <h2 id="overlay-title">SYSTEM CORRUPTED</h2>
+            <button onclick="resetGame()">RESTART</button>
+        </div>
+    </div>
